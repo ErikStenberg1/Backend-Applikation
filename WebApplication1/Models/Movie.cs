@@ -12,10 +12,9 @@ namespace WebApplication.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        public Category Category { get; set; }
-        [Required]
-        public int CategoryID { get; set; }
-        public List<Actor> ActorList { get; set; }
-        public List<Review> ReviewList { get; set; }
+        public string Category { get; set; }
+        public int ReleaseYear { get; set; }
+        //public List<Actor> ActorList { get; set; }
+        //public List<Review> ReviewList { get; set; }
     }
 }

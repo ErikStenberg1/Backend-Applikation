@@ -14,9 +14,9 @@ namespace WebApplication.Models
         [Required(AllowEmptyStrings = false)]
         public string LastName { get; set; }
         public Int16 Age { get; set; }    
-        [Required]
-        public Movie Movie { get; set; }
-        [Required]
-        public int MovieID { get; set; }
+        //[Required]
+        //public Movie Movie { get; set; }
+        //[Required]
+        //public int MovieID { get; set; }
     }
 }
