@@ -265,3 +265,4 @@ C:\Backend-Applikation\WebApplication1\bin\Debug\net5.0\runtimes\win-x64\native\
 C:\Backend-Applikation\WebApplication1\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Backend-Applikation\WebApplication1\obj\Debug\net5.0\Razor\Pages\Movies\CreateRandom.cshtml.g.cs
 C:\Backend-Applikation\WebApplication1\obj\Debug\net5.0\Razor\Pages\Movies\Index.cshtml.g.cs
+C:\Backend-Applikation\WebApplication1\obj\Debug\net5.0\Razor\Pages\Movies\Details.cshtml.g.cs

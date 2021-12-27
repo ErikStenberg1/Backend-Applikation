@@ -34,7 +34,8 @@ namespace WebApplication1.Pages.Movies
                 {
                     Title = parts[0],
                     Category = parts[1],
-                    ReleaseYear = int.Parse(parts[2])
+                    ReleaseYear = int.Parse(parts[2]),
+                    PosterPath = parts[3]                  
                 };
                 database.Movie.Add(movie);
             }

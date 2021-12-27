@@ -1,13 +1,7 @@
 ﻿@page
-@model WebApplication1.Pages.Movies.IndexModel
+@model WebApplication1.Pages.Actors.IndexModel
 @{
-    ViewData["Title"] = "Movies";
 }
-<h1>Movies</h1>
-<form method="post" asp-page="./CreateRandom">
-    <button type="submit">Create Random Movies</button>
-</form>
-
 <form method="get">
     <table>
         <tbody>
@@ -22,11 +16,10 @@
 
 <table>
     <tbody>
-        @foreach (var movies in Model.Movies)
+        @foreach (var actor in Model.Actors)
         {
             <tr>
-                <td><img src="~/Posters/@movies.PosterPath"/></td>
-                <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
+                <td><a asp-page="./Details" asp-route-id="@actor.ID">@actor.FirstName</a> |</td>
 
             </tr>
         }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
 using WebApplication1.Data;
-using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Pages.Movies
+namespace WebApplication1.Pages.Actors
 {
     public class IndexModel : PageModel
     {
@@ -19,21 +18,22 @@ namespace WebApplication1.Pages.Movies
             this.database = database;
         }
 
-        public IList<Movie> Movies { get; set; }
+        public IList<Actor> Actors { get; set; }
         [FromQuery]
         public string SearchTerm { get; set; }
 
 
         public async Task OnGetAsync()
         {
-            var query = database.Movie.AsNoTracking();
+            var query = database.Actor.AsNoTracking();
             if (SearchTerm != null)
             {
-                query = query.Where(m =>
-                m.Title.ToLower().Contains(SearchTerm.ToLower()));
+                query = query.Where(a =>
+                a.FirstName.ToLower().Contains(SearchTerm.ToLower()) ||
+                a.LastName.ToLower().Contains(SearchTerm.ToLower()));
             }
 
-            Movies = await query.ToListAsync();
+            Actors = await query.ToListAsync();
         }
     }
 }

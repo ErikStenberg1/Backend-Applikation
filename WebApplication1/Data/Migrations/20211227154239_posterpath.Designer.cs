@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
 namespace WebApplication1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211227154239_posterpath")]
+    partial class posterpath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,10 +307,10 @@ namespace WebApplication1.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActorID")
+                    b.Property<int?>("ActorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("MovieID")
+                    b.Property<int?>("MovieID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -393,31 +395,20 @@ namespace WebApplication1.Data.Migrations
             modelBuilder.Entity("WebApplication1.Models.MovieCast", b =>
                 {
                     b.HasOne("WebApplication.Models.Actor", "Actor")
-                        .WithMany("MovieCasts")
-                        .HasForeignKey("ActorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ActorID");
 
                     b.HasOne("WebApplication.Models.Movie", "Movie")
-                        .WithMany("MovieCasts")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("MovieID");
 
                     b.Navigation("Actor");
 
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("WebApplication.Models.Actor", b =>
-                {
-                    b.Navigation("MovieCasts");
-                });
-
             modelBuilder.Entity("WebApplication.Models.Movie", b =>
                 {
-                    b.Navigation("MovieCasts");
-
                     b.Navigation("ReviewList");
                 });
 #pragma warning restore 612, 618

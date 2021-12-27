@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Models;
 
 namespace WebApplication.Models
 {
@@ -14,7 +15,9 @@ namespace WebApplication.Models
         [Required]
         public string Category { get; set; }
         public int ReleaseYear { get; set; }
-        //public List<Actor> ActorList { get; set; }
-        //public List<Review> ReviewList { get; set; }
+        public List<Review> ReviewList { get; set; }
+        [Required]
+        public string PosterPath { get; set; }
+        public List<MovieCast> MovieCasts { get; set; }
     }
 }
