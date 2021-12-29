@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Data;
 using WebApplication.Models;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
 using WebApplication1.Data.Migrations;
 
 namespace WebApplication1.Pages.Movies
@@ -19,17 +18,24 @@ namespace WebApplication1.Pages.Movies
         {
             this.database = database;
         }
-
-        public Movie movie { get; set; }
-        public Actor actor { get; set; }
-        public MovieCast movieCast { get; set; }
-        public Review review { get; set; }
-
+        public Actor Actor { get; set; }
+        public Movie Movie { get; set; }
+        public List<Actor> Actors { get; set; }
+        public List<Review> Reviews { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            movie = await database.Movie.FirstOrDefaultAsync(m => m.ID == id);
+            Movie = await database.Movie.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (movie == null)
+            Actors = await database.Actor
+                .Include(actor => actor.Movies)
+                .Where(actor => actor.Movies.Any(movie => movie.ID == id))
+                .ToListAsync();
+
+            Reviews = await database.Review
+                .Where(review => review.Movie.ID == id)
+                .ToListAsync();
+                
+            if (Movie == null)
             {
                 return NotFound();
             }

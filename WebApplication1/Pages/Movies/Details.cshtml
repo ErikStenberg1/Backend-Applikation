@@ -2,3 +2,34 @@
 @model WebApplication1.Pages.Movies.DetailsModel
 @{
 }
+<table>
+    <tbody>
+        <tr>
+            <td>@Model.Movie.Title</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+        @foreach (var actor in Model.Actors)
+        {
+        <tr>
+            <td><a asp-page="/Actors/Details" asp-route-id="@actor.ID">@actor.FirstName @actor.LastName</a> </td>
+            <td>@actor.Age</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<table>
+    <tbody>
+        @foreach (var review in Model.Reviews)
+        {
+            <tr>
+                <td>@review.Text</td>
+                <td>@review.Score</td>
+            </tr>
+        }
+    </tbody>
+</table>

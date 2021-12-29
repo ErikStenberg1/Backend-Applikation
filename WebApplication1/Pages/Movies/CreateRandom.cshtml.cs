@@ -54,24 +54,6 @@ namespace WebApplication1.Pages.Movies
             await database.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    actors = await LoadColumnCSV(@"Data\actors.csv");
-        //    foreach (var item in actors)
-        //    {
-        //        string[] parts = item.Split(',');
-        //        var actor = new Actor
-        //        {
-        //            FirstName = parts[0],
-        //            LastName = parts[1],
-        //            Age = Int16.Parse(parts[2]),
-        //            MovieID = int.Parse(parts[3])
-        //        };
-        //        database.Actor.Add(actor);
-        //    }
-        //    await database.SaveChangesAsync();
-        //    return RedirectToPage("./Index");
-        //}
 
         public async Task<string[]> LoadColumnCSV(string path)
         {

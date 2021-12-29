@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WebApplication.Models;
-using WebApplication1.Models;
 
 namespace WebApplication1.Data
 {
@@ -17,6 +16,5 @@ namespace WebApplication1.Data
         public DbSet<Actor> Actor { get; set; }
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Review> Review { get; set; }
-        public DbSet<MovieCast> MovieCasts { get; set; }
     }
 }

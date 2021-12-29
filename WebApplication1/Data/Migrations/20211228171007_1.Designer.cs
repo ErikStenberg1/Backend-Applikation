@@ -10,16 +10,31 @@ using WebApplication1.Data;
 namespace WebApplication1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211222160143_removed class category")]
-    partial class removedclasscategory
+    [Migration("20211228171007_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ActorMovie", b =>
+                {
+                    b.Property<int>("ActorsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MoviesID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActorsID", "MoviesID");
+
+                    b.HasIndex("MoviesID");
+
+                    b.ToTable("ActorMovie");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -239,12 +254,7 @@ namespace WebApplication1.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MovieID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("MovieID");
 
                     b.ToTable("Actor");
                 });
@@ -257,6 +267,10 @@ namespace WebApplication1.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PosterPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -299,6 +313,21 @@ namespace WebApplication1.Data.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Review");
+                });
+
+            modelBuilder.Entity("ActorMovie", b =>
+                {
+                    b.HasOne("WebApplication.Models.Actor", null)
+                        .WithMany()
+                        .HasForeignKey("ActorsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication.Models.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -352,17 +381,6 @@ namespace WebApplication1.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApplication.Models.Actor", b =>
-                {
-                    b.HasOne("WebApplication.Models.Movie", "Movie")
-                        .WithMany("ActorList")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-                });
-
             modelBuilder.Entity("WebApplication.Models.Review", b =>
                 {
                     b.HasOne("WebApplication.Models.Movie", "Movie")
@@ -384,8 +402,6 @@ namespace WebApplication1.Data.Migrations
 
             modelBuilder.Entity("WebApplication.Models.Movie", b =>
                 {
-                    b.Navigation("ActorList");
-
                     b.Navigation("ReviewList");
                 });
 #pragma warning restore 612, 618

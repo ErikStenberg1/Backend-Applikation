@@ -19,6 +19,21 @@ namespace WebApplication1.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ActorMovie", b =>
+                {
+                    b.Property<int>("ActorsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MoviesID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActorsID", "MoviesID");
+
+                    b.HasIndex("MoviesID");
+
+                    b.ToTable("ActorMovie");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -298,26 +313,19 @@ namespace WebApplication1.Data.Migrations
                     b.ToTable("Review");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.MovieCast", b =>
+            modelBuilder.Entity("ActorMovie", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasOne("WebApplication.Models.Actor", null)
+                        .WithMany()
+                        .HasForeignKey("ActorsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ActorID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ActorID");
-
-                    b.HasIndex("MovieID");
-
-                    b.ToTable("MovieCasts");
+                    b.HasOne("WebApplication.Models.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -390,34 +398,8 @@ namespace WebApplication1.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.MovieCast", b =>
-                {
-                    b.HasOne("WebApplication.Models.Actor", "Actor")
-                        .WithMany("MovieCasts")
-                        .HasForeignKey("ActorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication.Models.Movie", "Movie")
-                        .WithMany("MovieCasts")
-                        .HasForeignKey("MovieID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("WebApplication.Models.Actor", b =>
-                {
-                    b.Navigation("MovieCasts");
-                });
-
             modelBuilder.Entity("WebApplication.Models.Movie", b =>
                 {
-                    b.Navigation("MovieCasts");
-
                     b.Navigation("ReviewList");
                 });
 #pragma warning restore 612, 618
