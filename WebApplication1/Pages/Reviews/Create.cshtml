@@ -1,0 +1,17 @@
+﻿@page
+@model WebApplication1.Pages.Reviews.CreateModel
+@{
+}
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <partial name="_EditForm" for="Review" />
+    <button type="submit">Create Contact</button>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

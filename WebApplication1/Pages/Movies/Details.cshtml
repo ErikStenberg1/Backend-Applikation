@@ -5,9 +5,11 @@
 <table>
     <tbody>
         <tr>
+            <td><img class="img" src="~/Posters/@Model.Movie.PosterPath" /></td>
+        </tr>
+        <tr>
             <td>@Model.Movie.Title</td>
         </tr>
-
     </tbody>
 </table>
 
@@ -17,7 +19,6 @@
         {
         <tr>
             <td><a asp-page="/Actors/Details" asp-route-id="@actor.ID">@actor.FirstName @actor.LastName</a> </td>
-            <td>@actor.Age</td>
         </tr>
         }
     </tbody>
@@ -26,10 +27,11 @@
     <tbody>
         @foreach (var review in Model.Reviews)
         {
-            <tr>
-                <td>@review.Text</td>
-                <td>@review.Score</td>
-            </tr>
+        <tr>
+            <td>@review.User.UserName</td>
+            <td>@review.Text</td>
+            <td>@review.Score</td>
+        </tr>
         }
     </tbody>
 </table>

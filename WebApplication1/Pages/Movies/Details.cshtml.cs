@@ -33,6 +33,7 @@ namespace WebApplication1.Pages.Movies
 
             Reviews = await database.Review
                 .Where(review => review.Movie.ID == id)
+                .Include(review => review.User)
                 .ToListAsync();
                 
             if (Movie == null)

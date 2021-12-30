@@ -15629,6 +15629,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Actors\\Details.cshtml",
+      "TargetPath": "Pages\\Actors\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -15644,8 +15649,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Actors\\Index.cshtml",
+      "TargetPath": "Pages\\Actors\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Movies\\Index.cshtml",
+      "TargetPath": "Pages\\Movies\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Movies\\CreateRandom.cshtml",
+      "TargetPath": "Pages\\Movies\\CreateRandom.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\_ViewImports.cshtml",
       "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Backend-Applikation\\WebApplication1\\Pages\\Movies\\Details.cshtml",
+      "TargetPath": "Pages\\Movies\\Details.cshtml",
       "FileKind": "mvc"
     },
     {

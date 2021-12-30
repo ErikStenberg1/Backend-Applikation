@@ -25,7 +25,6 @@ namespace WebApplication1.Pages.Movies
 
         public async Task<IActionResult> OnPostAsync()
         {
-
             movies = await LoadColumnCSV(@"Data\movies.csv");
             foreach (var item in movies)
             {
@@ -35,10 +34,11 @@ namespace WebApplication1.Pages.Movies
                     Title = parts[0],
                     Category = parts[1],
                     ReleaseYear = int.Parse(parts[2]),
-                    PosterPath = parts[3]                  
+                    PosterPath = parts[3]
                 };
                 database.Movie.Add(movie);
             }
+
             actors = await LoadColumnCSV(@"Data\actors.csv");
             foreach (var item in actors)
             {
@@ -59,10 +59,10 @@ namespace WebApplication1.Pages.Movies
         {
             string[] lines = await System.IO.File.ReadAllLinesAsync(path);
             List<string> parts = new List<string> { };
-                foreach (var line in lines.ToList())
-                {
-                    parts.Add(line);
-                }
+            foreach (var line in lines.ToList())
+            {
+                parts.Add(line);
+            }
             return parts.ToArray();
         }
     }

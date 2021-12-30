@@ -1,0 +1,18 @@
+﻿@model WebApplication.Models.Review;
+
+<div asp-validation-summary="ModelOnly"></div>
+<input type="hidden" asp-for="UserID">
+<table>
+    <tbody>
+        <tr>
+            <th><label asp-for="Text">@Html.DisplayNameFor(m => m.Text)</label></th>
+            <td><input asp-for="Text"></td>
+            <td><span asp-validation-for="Text"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="Score">@Html.DisplayNameFor(m => m.Score)</label></th>
+            <td><input asp-for="Score"></td>
+            <td><span asp-validation-for="Score"></span></td>
+        </tr>
+    </tbody>
+</table>
