@@ -23,12 +23,16 @@ namespace WebApplication1.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var erik = new Actor() { FirstName = "Erik", LastName = "Stenberg", Age = 19 };
-            var avengers = new Movie() { Title = "Avengers", PosterPath = "brad.jpg", Category = "Action", ReleaseYear = 2020, Actors = new() { erik } };
-            database.AddRange(erik, avengers);
+            if (database.Movie.Any())
+            {
+                
+            }
+            var brad = new Actor() { FirstName = "Brad", LastName = "Pitt", Age = 50 };
+            var avengers = new Movie() { Title = "Avengers", PosterPath = "brad.jpg", Category = "Action", ReleaseYear = 2020, Actors = new() { brad } };
+            database.AddRange(brad, avengers);
             await database.SaveChangesAsync();
-            return RedirectToPage("/Movies/Index");
+            return Page();
         }
     }
-    
+
 }
