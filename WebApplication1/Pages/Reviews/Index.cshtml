@@ -2,3 +2,30 @@
 @model WebApplication1.Pages.Reviews.IndexModel
 @{
 }
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <partial name="_EditForm" for="Review" />
+    <button type="submit">Create Review</button>
+</form>
+<th><a asp-page="./Edit" asp-route-id="@Model.Reviews.Select(review => review.ID)">Edit your review</a></th>
+
+<table>
+    <tbody>
+        @foreach (var review in Model.Reviews)
+        {
+            <tr>
+                <td>@review.User.UserName</td>
+                <td>@review.Text</td>
+                <td>@review.Score</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

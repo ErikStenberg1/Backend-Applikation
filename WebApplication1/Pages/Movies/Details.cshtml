@@ -23,15 +23,3 @@
         }
     </tbody>
 </table>
-<table>
-    <tbody>
-        @foreach (var review in Model.Reviews)
-        {
-        <tr>
-            <td>@review.User.UserName</td>
-            <td>@review.Text</td>
-            <td>@review.Score</td>
-        </tr>
-        }
-    </tbody>
-</table>

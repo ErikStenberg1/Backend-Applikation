@@ -15,7 +15,6 @@ namespace WebApplication.Models
         [Required]
         public string UserID { get; set; }
         public IdentityUser User { get; set; }
-        [Required]
         public Movie Movie { get; set; }
         [Required]
         public int MovieID { get; set; }

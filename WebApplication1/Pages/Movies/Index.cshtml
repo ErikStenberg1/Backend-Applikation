@@ -19,17 +19,15 @@
     </table>
     <button type="submit">Search</button>
 </form>
-
 <table>
     <tbody>
         @foreach (var movies in Model.Movies)
         {
-            <tr>
-                <td><img class="img" src="~/Posters/@movies.PosterPath"/></td>
-                <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
-                <th><a asp-page="/Reviews/Create" asp-route-id="@movies.ID">Write a review</a></th>
-            </tr>
-
+        <tr>
+            <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
+            <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
+            <th><a asp-page="/Reviews/Index" asp-route-movieID="@movies.ID">Reviews</a></th>
+        </tr>
         }
     </tbody>
 </table>

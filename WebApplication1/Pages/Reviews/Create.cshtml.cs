@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Data;
 using WebApplication.Models;
-
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace WebApplication1.Pages.Reviews
 {
@@ -21,30 +20,40 @@ namespace WebApplication1.Pages.Reviews
             this.accessControl = accessControl;
         }
         public Review Review { get; set; }
-        public int MovieID { get; set; }
-        private void CreateEmptyReview()
+        public int movieID { get; set; }
+        public List<Review> Count { get; set; }
+        public IEnumerable<int> id { get; set; }
+        private void CreateEmptyReview(int movieID)
         {
             Review = new Review
             {
-                UserID = accessControl.LoggedInUserID
+                UserID = accessControl.LoggedInUserID,
+                MovieID = movieID
             };
         }
-        public void OnGet(int id)
+        public async Task OnGetAsync(int movieID)
         {
-            CreateEmptyReview();
+            Count = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
+            id = Count.Select(review => review.ID);
+            CreateEmptyReview(movieID);
         }
-        public async Task<IActionResult> OnPostAsync(Review review)
+        public async Task<IActionResult> OnPostAsync(Review review, int movieID)
         {
-            CreateEmptyReview();
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            Count = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else if (Count.Any())
+            {
+                id = Count.Select(review => review.ID);
+                return RedirectToPage("./Edit", new { id });
+            }
+            CreateEmptyReview(movieID);
 
             Review.Text = review.Text;
             Review.Score = review.Score;
-            Review.MovieID = 2;
+
 
             await database.Review.AddAsync(review);
             await database.SaveChangesAsync();

@@ -12,6 +12,7 @@
     <partial name="_EditForm" for="Review" />
     <button type="submit">Create Contact</button>
 </form>
+<th><a asp-page="./Edit" asp-route-id="@Model.Count.Select(review => review.ID)">Edit your review</a></th>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
