@@ -19,8 +19,23 @@ namespace WebApplication1.Pages.Reviews
             this.database = database;
             this.accessControl = accessControl;
         }
-        public void OnGet()
+
+        public async Task<IActionResult> OnGetAsync(int id)
         {
+            var review = await database.Review.FindAsync(id);
+            if (!database.Review.Contains(review))
+            {
+                return RedirectToPage("./Index", new { id });
+            }
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            var review = await database.Review.FindAsync(id);
+
+            database.Review.Remove(review);
+            await database.SaveChangesAsync();
+            return RedirectToPage("./Index", new { id });
         }
     }
 }

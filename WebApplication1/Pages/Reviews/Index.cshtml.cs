@@ -24,14 +24,40 @@ namespace WebApplication1.Pages.Reviews
         public List<Review> Reviews{ get; set; }
         public Review Review { get; set; }
         public Movie Movie { get; set; }
-        public int ID { get; set; }
-        public async Task OnGetAsync(int ID)
+        public int movieID { get; set; }
+        public IEnumerable<int> ID { get; set; }
+        public async Task OnGetAsync(int movieID)
         {
             Reviews  = await database.Review
                 .Include(r => r.User)
-                .Where(r => r.MovieID == ID && r.UserID == accessControl.LoggedInUserID)
+                .Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID)
                 .OrderBy(r => r.Score)
                 .ToListAsync();
+            
+            ID = database.Review
+                .Select(r => r.ID);
+        }
+        public async Task<IActionResult> OnPostAsync(Review review, int movieID)
+        {
+            Reviews = await database.Review
+                .Include(r => r.User)
+                .Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID)
+                .OrderBy(r => r.Score)
+                .ToListAsync();
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else if (Reviews.Any())
+            {
+                ID = database.Review
+                .Select(r => r.ID);
+                return RedirectToPage("./Edit", new { ID });
+            }
+            await database.Review.AddAsync(review);
+            await database.SaveChangesAsync();
+            return RedirectToPage("./Details", new { id = review.ID });
         }
     }
 }

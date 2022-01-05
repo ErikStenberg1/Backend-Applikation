@@ -12,8 +12,8 @@
     <partial name="_EditForm" for="Review" />
     <button type="submit">Create Review</button>
 </form>
-<th><a asp-page="./Edit" asp-route-id="@Model.Reviews.Select(review => review.ID)">Edit your review</a></th>
-<th><a asp-page="./Delete" asp-route-id="@Model.Reviews.Select(review => review.ID)">Delete your review</a></th>
+<th><a asp-page="./Edit" asp-route-id="@Model.ID">Edit your review</a></th>
+<th><a asp-page="./Delete" asp-route-id="@Model.ID">Delete your review</a></th>
 
 <table>
     <tbody>
