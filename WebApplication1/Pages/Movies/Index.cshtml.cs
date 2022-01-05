@@ -22,7 +22,8 @@ namespace WebApplication1.Pages.Movies
         public IList<Movie> Movies { get; set; }
         [FromQuery]
         public string SearchTerm { get; set; }
-
+        public Review Review { get; set; }
+        public double? avgScore { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -32,6 +33,7 @@ namespace WebApplication1.Pages.Movies
                 query = query.Where(m =>
                 m.Title.ToLower().Contains(SearchTerm.ToLower()));
             }
+            avgScore = await database.Review.AverageAsync(r => r.Score);
 
             Movies = await query.ToListAsync();
         }

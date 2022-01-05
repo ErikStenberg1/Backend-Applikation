@@ -24,9 +24,10 @@
         @foreach (var movies in Model.Movies)
         {
         <tr>
+            <td>@Model.avgScore</td>
             <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
             <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
-            <th><a asp-page="/Reviews/Index" asp-route-movieID="@movies.ID">Reviews</a></th>
+            <th><a asp-page="/Reviews/Index" asp-route-movieID="@movies.ID">Write or edit a review</a></th>
         </tr>
         }
     </tbody>
