@@ -16,5 +16,9 @@ namespace WebApplication1.Data
         {
             LoggedInUserID = userManager.GetUserId(httpContextAccessor.HttpContext.User);
         }
+        public bool UserCanAccess(Review review)
+        {
+            return review.UserID == LoggedInUserID;
+        }
     }
 }
