@@ -14,9 +14,11 @@ namespace WebApplication1.Pages.Movies
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext database;
-        public IndexModel(ApplicationDbContext database)
+        private readonly AccessControl accessControl;
+        public IndexModel(ApplicationDbContext database, AccessControl accessControl)
         {
             this.database = database;
+            this.accessControl = accessControl;
         }
 
         public IList<Movie> Movies { get; set; }

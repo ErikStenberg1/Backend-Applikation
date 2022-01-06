@@ -20,9 +20,12 @@ namespace WebApplication1.Pages.Reviews
             this.accessControl = accessControl;
         }
         public Review Review { get; set; }
+        public Movie Movie { get; set; }
+        public List<Review> Reviews { get; set; }
         public int movieID { get; set; }
-        public List<Review> Count { get; set; }
-        public IEnumerable<int> id { get; set; }
+        public int ReviewID { get; set; }
+        public int MovieID { get; private set; }
+        //movieID is 0
         private void CreateEmptyReview(int movieID)
         {
             Review = new Review
@@ -33,22 +36,34 @@ namespace WebApplication1.Pages.Reviews
         }
         public async Task OnGetAsync(int movieID)
         {
-            Count = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
-            id = Count.Select(review => review.ID);
+            Reviews = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
+
+            ReviewID = await database.Review
+            .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == r.Movie.ID)
+            .Select(r => r.ID).SingleOrDefaultAsync();
+
             CreateEmptyReview(movieID);
         }
         public async Task<IActionResult> OnPostAsync(Review review, int movieID)
         {
-            Count = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
+            Reviews = await database.Review.Where(r => r.MovieID == movieID && r.UserID == accessControl.LoggedInUserID).ToListAsync();
             if (!ModelState.IsValid)
             {
-                return Page();
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
             }
-            else if (Count.Any())
+            else if (Reviews.Any())
             {
-                id = Count.Select(review => review.ID);
-                return RedirectToPage("./Edit", new { id });
+                ReviewID = await database.Review
+                .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == r.Movie.ID)
+                .Select(r => r.ID).SingleOrDefaultAsync();
+                return RedirectToPage("./Edit", new { id = ReviewID });
             }
+            //some error here
+            MovieID = await database.Movie
+            .Where(m => m.ID == Review.MovieID)
+            .Select(m => m.ID)
+            .SingleOrDefaultAsync();
+
             CreateEmptyReview(movieID);
 
             Review.Text = review.Text;
@@ -57,7 +72,7 @@ namespace WebApplication1.Pages.Reviews
 
             await database.Review.AddAsync(review);
             await database.SaveChangesAsync();
-            return RedirectToPage("./Details", new { id = review.ID });
+            return RedirectToPage("./Index", new { id = movieID });
         }
     }
 }

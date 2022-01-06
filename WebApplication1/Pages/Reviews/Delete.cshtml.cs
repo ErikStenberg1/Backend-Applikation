@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication1.Data;
 using WebApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Pages.Reviews
 {
@@ -19,23 +20,49 @@ namespace WebApplication1.Pages.Reviews
             this.database = database;
             this.accessControl = accessControl;
         }
+        public Movie Movie { get; set; }
+        public int MovieID { get; set; }
+        public Review Review { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var review = await database.Review.FindAsync(id);
-            if (!database.Review.Contains(review))
+            Review = await database.Review
+            .Where(r => r.ID == id)
+            .SingleOrDefaultAsync();
+
+            var userReview = await database.Review
+                .Where(r => r.ID == id)
+                .ToListAsync();
+
+            if (!userReview.Any())
             {
-                return RedirectToPage("./Index", new { id });
+                return RedirectToPage("/Movies/Index");
+            }
+            else if (!accessControl.UserCanAccess(Review))
+            {
+                return Forbid();
             }
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(int id)
         {
+            if (!accessControl.UserCanAccess(Review))
+            {
+                return Forbid();
+            }
+            Review = await database.Review
+                .Where(r => r.ID == id)
+                .SingleOrDefaultAsync();
+
+            MovieID = await database.Movie
+                .Where(m => m.ID == Review.MovieID)
+                .Select(m => m.ID)
+                .SingleOrDefaultAsync();
             var review = await database.Review.FindAsync(id);
 
             database.Review.Remove(review);
             await database.SaveChangesAsync();
-            return RedirectToPage("./Index", new { id });
+            return RedirectToPage("/Movies/Index");
         }
     }
 }
