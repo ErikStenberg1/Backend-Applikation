@@ -26,20 +26,20 @@ namespace WebApplication1.Pages.Reviews
         public Movie Movie { get; set; }
         public int MovieID { get; set; }
         public int ReviewID { get; set; }
-        public async Task OnGetAsync(int MovieID)
+        public async Task OnGetAsync(int id)
         {
             Reviews  = await database.Review
                 .Include(r => r.User)
-                .Where(r => r.MovieID == MovieID && r.UserID == accessControl.LoggedInUserID)
-                .OrderBy(r => r.Score)
+                .Where(r => r.MovieID == id && r.UserID == accessControl.LoggedInUserID)
                 .ToListAsync();
 
             ReviewID = await database.Review
-                .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == r.Movie.ID)
+                .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == id)
                 .Select(r => r.ID).SingleOrDefaultAsync();
 
-            Movie = await database.Movie
-                .Where(m => m.ID == MovieID)
+            MovieID = await database.Movie
+                .Where(m => m.ID == id)
+                .Select(m => m.ID)
                 .SingleOrDefaultAsync();
         }
 

@@ -27,7 +27,7 @@
             <td>@Model.avgScore</td>
             <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
             <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
-            <th><a asp-page="/Reviews/Index" asp-route-MovieID="@movies.ID">Write, delete or edit a review</a></th>
+            <th><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></th>
         </tr>
         }
     </tbody>
