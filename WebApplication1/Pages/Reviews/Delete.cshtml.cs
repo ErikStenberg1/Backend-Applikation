@@ -46,18 +46,14 @@ namespace WebApplication1.Pages.Reviews
         }
         public async Task<IActionResult> OnPostAsync(int id)
         {
+            Review = await database.Review
+            .Where(r => r.ID == id)
+            .SingleOrDefaultAsync();
             if (!accessControl.UserCanAccess(Review))
             {
                 return Forbid();
             }
-            Review = await database.Review
-                .Where(r => r.ID == id)
-                .SingleOrDefaultAsync();
 
-            MovieID = await database.Movie
-                .Where(m => m.ID == Review.MovieID)
-                .Select(m => m.ID)
-                .SingleOrDefaultAsync();
             var review = await database.Review.FindAsync(id);
 
             database.Review.Remove(review);
