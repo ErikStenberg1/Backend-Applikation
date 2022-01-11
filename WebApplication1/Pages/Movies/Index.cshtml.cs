@@ -35,7 +35,10 @@ namespace WebApplication1.Pages.Movies
                 query = query.Where(m =>
                 m.Title.ToLower().Contains(SearchTerm.ToLower()));
             }
-            avgScore = await database.Review.AverageAsync(r => r.Score);
+            avgScore = await database.Review
+                .Include(m => m.Movie)
+                .Where(r => r.Movie.ID == r.MovieID)
+                .AverageAsync(r => r.Score);
 
             Movies = await query.ToListAsync();
         }

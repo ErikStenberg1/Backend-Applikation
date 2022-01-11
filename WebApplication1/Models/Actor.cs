@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,5 +16,7 @@ namespace WebApplication.Models
         public string LastName { get; set; }
         public Int16 Age { get; set; }    
         public List<Movie> Movies { get; set; }
+        [NotMapped]
+        public string fullname { get { return this.FirstName + " " + this.LastName; } }
     }
 }

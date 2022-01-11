@@ -24,7 +24,6 @@ namespace WebApplication1.Pages.Reviews
         public List<Review> Reviews { get; set; }
         public int ReviewID { get; set; }
         public int MovieID { get; set; }
-        //movieID is 0
         private void CreateEmptyReview()
         {
             Review = new Review
@@ -63,7 +62,6 @@ namespace WebApplication1.Pages.Reviews
             CreateEmptyReview();
             Review.Text = review.Text;
             Review.Score = review.Score;
-            //Gets set to 0
             Review.MovieID = id;
 
             database.Review.Add(Review);

@@ -1,0 +1,36 @@
+﻿@page
+@model WebApplication1.Pages.Actors.CollaborationsModel
+@{
+}
+<form method="get">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <select asp-for="SortColumn" asp-items="Model.SortColumnList">
+                        <option></option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    <select asp-for="SortColumn2" asp-items="Model.SortColumnList2">
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td><a asp-page="./Details" asp-route-id="@movie.ID">@movie.Title</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
