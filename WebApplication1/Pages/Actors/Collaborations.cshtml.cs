@@ -39,7 +39,7 @@ namespace WebApplication1.Pages.Actors
                 .Include(m => m.Actors)
                 .Where(m => m.Actors.Any(a => a.fullname.ToLower().Contains(SortColumn.ToLower())));
 
-            Movies = await query.ToListAsync();
+            //Movies = await query.ToListAsync();
         }
     }
 }

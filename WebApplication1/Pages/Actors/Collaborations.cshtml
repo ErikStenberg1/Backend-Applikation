@@ -4,6 +4,11 @@
 }
 <form method="get">
     <table>
+        <thead>
+            <tr>
+                <th>Show collaborations between:</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
                 <td>
@@ -18,19 +23,8 @@
                     </select>
                 </td>
             </tr>
-            </tr>
         </tbody>
     </table>
     <button type="submit">Search</button>
 </form>
 
-<table>
-    <tbody>
-        @foreach (var movie in Model.Movies)
-        {
-            <tr>
-                <td><a asp-page="./Details" asp-route-id="@movie.ID">@movie.Title</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
