@@ -21,25 +21,37 @@ namespace WebApplication1.Pages.Actors
             this.database = database;
         }
         public Actor Actor { get; set; }
-        public List<Actor> Actors { get; set; }
         public List<Movie> Movies { get; set; }
         public string SortColumn { get; set; }
         public int SortColumn2 { get; set; }
         public SelectList SortColumnList { get; set; }
         public SelectList SortColumnList2 { get; set; }
+        public List<SelectListItem> Actors { get; set; }
 
 
 
+        private async Task Setup()
+        {
+            Actors = await database.Actor.AsNoTracking()
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .Select(a => new SelectListItem
+                {
+                    Value = a.ID.ToString(),
+                    Text = a.fullname
+                })
+                .ToListAsync();
+
+        }
         public async Task OnGetAsync()
         {
-            SortColumnList = new SelectList(database.Actor, nameof(Actor.FirstName), nameof(Actor.fullname));
-            SortColumnList2 = new SelectList(database.Actor, nameof(Actor.ID), nameof(Actor.fullname));
-
-            var query = database.Movie.AsNoTracking()
-                .Include(m => m.Actors)
-                .Where(m => m.Actors.Any(a => a.fullname.ToLower().Contains(SortColumn.ToLower())));
-
-            //Movies = await query.ToListAsync();
+            await Setup();
+        }
+        public async Task OnPostAsync(Actor actor, Actor actor1)
+        {
+            await Setup();
+            var actor2 = await database.Actor.FindAsync(actor.ID);
+            var actor3 = await database.Actor.FindAsync(actor1.ID);
         }
     }
 }

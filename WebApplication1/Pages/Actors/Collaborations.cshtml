@@ -2,7 +2,7 @@
 @model WebApplication1.Pages.Actors.CollaborationsModel
 @{
 }
-<form method="get">
+<form method="post">
     <table>
         <thead>
             <tr>
@@ -12,14 +12,12 @@
         <tbody>
             <tr>
                 <td>
-                    <select asp-for="SortColumn" asp-items="Model.SortColumnList">
-                        <option></option>
+                    <select asp-for="Actor.ID" asp-items="Model.Actors">
                     </select>
                 </td>
             <tr>
                 <td>
-                    <select asp-for="SortColumn2" asp-items="Model.SortColumnList2">
-                        <option></option>
+                    <select asp-for="Actor.ID" asp-items="Model.Actors">
                     </select>
                 </td>
             </tr>

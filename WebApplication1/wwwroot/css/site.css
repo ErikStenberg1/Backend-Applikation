@@ -7,9 +7,8 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    text-decoration: none;
 }
 
 .btn-primary {
@@ -27,12 +26,7 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+  font-size: 20px;
 }
 
 .border-top {
@@ -60,10 +54,14 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  margin: 0;
+  padding: 0;
   margin-bottom: 60px;
+  background-color: gray;
+
 }
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
@@ -71,6 +69,112 @@ body {
 }
 
 .img {
-    height: 50px;
-    width: 50px;
+    width: auto;
+    max-width: 100%;
+    max-height: 150px;
+}
+.actor-img {
+    width: auto;
+    max-width: 100%;
+    max-height: 400px;
+}
+.movie-img {
+    width: auto;
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+.nav-listitems {
+    display: flex;
+    flex: 5;
+}
+.navbar-navbar {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: flex-start;
+}
+.nav-item {
+    padding: 10px
+}
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: flex-end;
+    flex: 1;
+}
+#login {
+    margin-right: 20px;
+}
+.main {
+    min-height: 100vh;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    margin: auto;
+    padding-top: 20px;
+}
+.table {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+tbody {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 45%;
+}
+.center {
+    text-align: center;
+}
+td {
+    display: inline-block;
+}
+.footer, .footer a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.actor-movies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+#reviewUser, #score,{
+    padding-bottom: 10px;
+}
+#reviewText {
+    padding-bottom: 40px;
+}
+.bold {
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    .table {
+        flex-direction: column;
+    }
+    .actor-movies {
+        padding: 0;
+    }
+    tbody {
+        padding-top: 0;
+        padding-bottom: 5px;
+    }
 }

@@ -2,36 +2,45 @@
 @model WebApplication1.Pages.Movies.DetailsModel
 @{
 }
-<table>
-    <tbody>
-        <tr>
-            <td><img class="img" src="~/Posters/@Model.Movie.PosterPath" /></td>
-        </tr>
-        <tr>
-            <td>@Model.Movie.Title</td>
-        </tr>
-    </tbody>
-</table>
-
-<table>
-    <tbody>
-        @foreach (var actor in Model.Actors)
-        {
-        <tr>
-            <td><a asp-page="/Actors/Details" asp-route-id="@actor.ID">@actor.FirstName @actor.LastName</a> </td>
-        </tr>
-        }
-    </tbody>
-</table>
-<table>
-    <tbody>
-        @foreach (var review in Model.Reviews)
-        {
-        <tr>
-            <td id="score">@review.Score</td>
-            <td id="reviewText">@review.Text</td>
-            <td id="reviewUser">@review.User.UserName</td>
-        </tr>
-        }
-    </tbody>
-</table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><h1>@Model.Movie.Title</h1></td>
+            </tr>
+            <tr>
+                <td><img class="movie-img" src="~/Posters/@Model.Movie.PosterPath" /></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><h2>Actors</h2></td>
+            </tr>
+            @foreach (var actor in Model.Actors)
+            {
+                <tr>
+                    <td><a asp-page="/Actors/Details" asp-route-id="@actor.ID">@actor.FirstName @actor.LastName</a> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><h2>Reviews</h2></td>
+            </tr>
+            @foreach (var review in Model.Reviews)
+            {
+                <tr class="spacing">
+                    <td id="reviewUser"><span class="bold">User: </span>@review.User.UserName</td>
+                </tr>
+                <tr class="spacing">
+                    <td id="score"><span class="bold">Rating:</span> @review.Score</td>
+                </tr>
+                <tr class="spacing">
+                    <td id="reviewText"><span class="bold">Review: </span> @review.Text</td>
+                </tr>
+            }
+        </tbody>
+    </table>

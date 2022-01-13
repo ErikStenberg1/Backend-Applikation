@@ -3,29 +3,32 @@
 @{
     ViewData["Title"] = "Movies";
 }
-<h1>Movies</h1>
+<h1 class="center">Movies</h1>
 
 <form method="get">
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th><label for="SearchTerm">Search for movies</label></th>
                 <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+                <td><button type="submit">Search</button></td>
             </tr>
         </tbody>
     </table>
-    <button type="submit">Search</button>
 </form>
-<table>
-    <tbody>
+
+    <table class="table">
         @foreach (var movies in Model.Movies)
         {
-        <tr>
-            <td>@Model.avgScore</td>
-            <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
-            <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a> |</td>
-            <th><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></th>
-        </tr>
+            <tbody>
+                <tr>
+                    <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
+                    <td>@Model.avgScore &#9734 </td>
+                    <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a></td>
+                </tr>
+                <tr>
+                    <td><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></td>
+                </tr>
+            </tbody>
         }
-    </tbody>
-</table>
+    </table>

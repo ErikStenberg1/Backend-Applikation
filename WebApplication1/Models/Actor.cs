@@ -14,7 +14,8 @@ namespace WebApplication.Models
         public string FirstName { get; set; }
         [Required(AllowEmptyStrings = false)]
         public string LastName { get; set; }
-        public Int16 Age { get; set; }    
+        public Int16 Age { get; set; }
+        public string PosterPath { get; set; }
         public List<Movie> Movies { get; set; }
         [NotMapped]
         public string fullname { get { return this.FirstName + " " + this.LastName; } }

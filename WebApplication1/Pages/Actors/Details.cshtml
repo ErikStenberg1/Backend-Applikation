@@ -2,21 +2,26 @@
 @model WebApplication1.Pages.Actors.DetailsModel
 @{
 }
-<table>
-    <tbody>
-        <tr>
-            <td>Full name: @Model.Actor.FirstName @Model.Actor.LastName</td>
-        </tr>
-        <tr>
-            <td>Age: @Model.Actor.Age</td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><img class="actor-img" src="~/Posters/@Model.Actor.PosterPath" /></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>Full name: @Model.Actor.FirstName @Model.Actor.LastName</td>
+            </tr>
+            <tr>
+                <td>Age: @Model.Actor.Age</td>
+            </tr>
+        </tbody>
+    </table>
 
-<table>
+<table class="actor-movies">
     <tbody>
         <tr>
-            <td>Movies</td>
+            <td><h2>Movies</h2></td>
         </tr>
         @foreach (var movie in Model.Movies)
         {

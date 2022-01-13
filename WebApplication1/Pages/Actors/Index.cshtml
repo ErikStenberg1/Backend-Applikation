@@ -2,6 +2,7 @@
 @model WebApplication1.Pages.Actors.IndexModel
 @{
 }
+<h1 class="center">Actors</h1>
 <form method="get">
     <table>
         <tbody>
@@ -13,11 +14,11 @@
                     </select>
                 </td>
                 <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+                <td><button type="submit">Search</button></td>
             </tr>
             <tr>
         </tbody>
     </table>
-    <button type="submit">Search</button>
 </form>
 
 <table>
