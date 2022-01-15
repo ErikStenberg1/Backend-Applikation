@@ -24,15 +24,25 @@ namespace WebApplication1.Pages.Actors
         public List<Movie> Movies { get; set; }
         public string SortColumn { get; set; }
         public int SortColumn2 { get; set; }
-        public SelectList SortColumnList { get; set; }
-        public SelectList SortColumnList2 { get; set; }
-        public List<SelectListItem> Actors { get; set; }
+        public List<SelectListItem> FirstActorList { get; set; }
+        public List<SelectListItem> SecondActorList { get; set; }
+        public int FirstActorID { get; set; }
+        public int SecondActorID { get; set; }
 
 
 
         private async Task Setup()
         {
-            Actors = await database.Actor.AsNoTracking()
+            FirstActorList = await database.Actor.AsNoTracking()
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .Select(a => new SelectListItem
+                {
+                    Value = a.ID.ToString(),
+                    Text = a.fullname
+                })
+                .ToListAsync();
+            SecondActorList = await database.Actor.AsNoTracking()
                 .OrderBy(a => a.FirstName)
                 .ThenBy(a => a.LastName)
                 .Select(a => new SelectListItem
@@ -50,8 +60,8 @@ namespace WebApplication1.Pages.Actors
         public async Task OnPostAsync(Actor actor, Actor actor1)
         {
             await Setup();
-            var actor2 = await database.Actor.FindAsync(actor.ID);
-            var actor3 = await database.Actor.FindAsync(actor1.ID);
+            var firstActor = await database.Actor.FindAsync(actor.ID);
+            var secondActor = await database.Actor.FindAsync(actor1.ID);
         }
     }
 }

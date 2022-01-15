@@ -1,4 +1,5 @@
 ﻿@page
+@using WebApplication.Models
 @model WebApplication1.Pages.Movies.IndexModel
 @{
     ViewData["Title"] = "Movies";
@@ -17,18 +18,18 @@
     </table>
 </form>
 
-    <table class="table">
-        @foreach (var movies in Model.Movies)
-        {
-            <tbody>
-                <tr>
-                    <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
-                    <td>@Model.avgScore &#9734 </td>
-                    <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a></td>
-                </tr>
-                <tr>
-                    <td><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></td>
-                </tr>
-            </tbody>
-        }
-    </table>
+<table class="table">
+    @foreach (Movie movies in Model.Movies)
+    {
+        <tbody>
+            <tr>
+                <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
+                <td>@movies.AvgScore &#9734 </td>
+                <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a></td>
+            </tr>
+            <tr>
+                <td><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></td>
+            </tr>
+        </tbody>
+    }
+</table>

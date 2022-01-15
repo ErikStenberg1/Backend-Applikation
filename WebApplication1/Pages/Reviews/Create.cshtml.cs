@@ -37,10 +37,6 @@ namespace WebApplication1.Pages.Reviews
 
             Movie = database.Movie.FirstOrDefault(m => m.ID == id);
 
-            ReviewID = await database.Review
-            .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == r.Movie.ID)
-            .Select(r => r.ID).SingleOrDefaultAsync();
-
             CreateEmptyReview();
         }
         public async Task<IActionResult> OnPostAsync(Review review, int id)
@@ -53,9 +49,9 @@ namespace WebApplication1.Pages.Reviews
             }
             else if (Reviews.Any())
             {
-                ReviewID = await database.Review
-                .Where(r => r.UserID == accessControl.LoggedInUserID && r.MovieID == r.Movie.ID)
-                .Select(r => r.ID).SingleOrDefaultAsync();
+                ReviewID = Reviews
+                    .Select(r => r.ID)
+                    .SingleOrDefault();
 
                 return RedirectToPage("./Edit", new { id = ReviewID });
             }

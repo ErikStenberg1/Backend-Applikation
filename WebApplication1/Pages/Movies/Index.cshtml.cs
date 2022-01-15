@@ -25,7 +25,6 @@ namespace WebApplication1.Pages.Movies
         [FromQuery]
         public string SearchTerm { get; set; }
         public Review Review { get; set; }
-        public double? avgScore { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -35,12 +34,27 @@ namespace WebApplication1.Pages.Movies
                 query = query.Where(m =>
                 m.Title.ToLower().Contains(SearchTerm.ToLower()));
             }
-            avgScore = await database.Review
-                .Include(m => m.Movie)
-                .Where(r => r.Movie.ID == r.MovieID)
-                .AverageAsync(r => r.Score);
+
 
             Movies = await query.ToListAsync();
+
+            foreach (var movie in Movies)
+            {
+                movie.AvgScore = await GetAvgScore(movie);
+            }
+        }
+        public async Task<double> GetAvgScore(Movie movie)
+        {
+            var reviews = await database.Review.Include(m => m.Movie)
+                .Where(r => r.MovieID == movie.ID)
+                .ToListAsync();
+            double totalScore = 0;
+            foreach (var review in reviews)
+            {
+                totalScore += (double)review.Score;
+            }
+            var avgScore = totalScore / reviews.Count;
+            return double.IsNaN(avgScore) ? 0 : avgScore;
         }
     }
 }

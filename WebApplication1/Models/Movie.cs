@@ -18,5 +18,6 @@ namespace WebApplication.Models
         [Required]
         public string PosterPath { get; set; }
         public List<Actor> Actors { get; set; }
+        public double AvgScore { get; set; }
     }
 }
