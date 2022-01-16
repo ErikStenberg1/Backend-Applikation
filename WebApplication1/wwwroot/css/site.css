@@ -156,7 +156,7 @@ td {
     justify-content: center;
     padding: 20px;
 }
-#reviewUser, #score,{
+#reviewUser, #score{
     padding-bottom: 10px;
 }
 #reviewText {

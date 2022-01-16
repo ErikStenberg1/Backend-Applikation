@@ -60,8 +60,12 @@ namespace WebApplication1.Pages.Actors
         public async Task OnPostAsync(Actor actor, Actor actor1)
         {
             await Setup();
-            var firstActor = await database.Actor.FindAsync(actor.ID);
-            var secondActor = await database.Actor.FindAsync(actor1.ID);
+            actor = await database.Actor.FindAsync(actor.ID);
+            actor1 = await database.Actor.FindAsync(actor1.ID);
+
+            var movies = await database.Movie
+                .Where(m => m.Actors.Contains(actor))
+                .ToListAsync();
         }
     }
 }
