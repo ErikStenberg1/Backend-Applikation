@@ -18,7 +18,6 @@ namespace WebApplication1.Pages.Actors
             this.database = database;
         }
         public Actor Actor { get; set; }
-        public Movie Movie { get; set; }
         public List<Movie> Movies { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)

@@ -84,7 +84,7 @@ body {
     max-height: 400px;
 }
 
-.container {
+.nav-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -102,7 +102,7 @@ body {
     list-style-type: none;
     justify-content: flex-start;
 }
-.nav-item {
+.nav-items {
     padding: 10px
 }
 .nav-link {
@@ -113,7 +113,7 @@ body {
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    justify-content: flex-end;
+    justify-content: center;
     flex: 1;
 }
 #login {
@@ -122,8 +122,6 @@ body {
 .main {
     min-height: 100vh;
     max-width: 1200px;
-    display: flex;
-    justify-content: center;
     background-color: #fff;
     margin: auto;
     padding-top: 20px;
@@ -133,8 +131,9 @@ body {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    min-width: 465px;
 }
-tbody {
+.tbody {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 45%;
@@ -154,7 +153,8 @@ td {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px;
+    margin: 5%;
+    margin-top: 0;
 }
 #reviewUser, #score{
     padding-bottom: 10px;
@@ -165,10 +165,42 @@ td {
 .bold {
     font-weight: bold;
 }
+.btn {
+    align-items: center;
+}
+.col-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.left-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 60px;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.review {
+    margin-left: 30px;
+}
 
+.textarea {
+    width: 250px;
+    height: 100px;
+}
+.td-spacing {
+    margin-right: 10px;
+}
 @media (max-width: 800px) {
-    .table {
+    .table, .left-table, .flex {
         flex-direction: column;
+    }
+    .left-table {
+        margin-left: 20px;
     }
     .actor-movies {
         padding: 0;
@@ -176,5 +208,15 @@ td {
     tbody {
         padding-top: 0;
         padding-bottom: 5px;
+    }
+}
+@media (max-width: 830px){
+    .navbar-navbar, .navbar-nav{
+        font-size: 14px;
+    }
+}
+@media (max-width: 660px){
+    .navbar-navbar, .navbar-nav {
+        flex-direction: column;
     }
 }

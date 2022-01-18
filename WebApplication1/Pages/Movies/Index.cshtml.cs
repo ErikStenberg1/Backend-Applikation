@@ -24,7 +24,6 @@ namespace WebApplication1.Pages.Movies
         public IList<Movie> Movies { get; set; }
         [FromQuery]
         public string SearchTerm { get; set; }
-        public Review Review { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -51,7 +50,7 @@ namespace WebApplication1.Pages.Movies
             double totalScore = 0;
             foreach (var review in reviews)
             {
-                totalScore += (double)review.Score;
+                totalScore += Math.Round((double)review.Score);
             }
             var avgScore = totalScore / reviews.Count;
             return double.IsNaN(avgScore) ? 0 : avgScore;

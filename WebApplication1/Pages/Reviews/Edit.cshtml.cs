@@ -37,7 +37,6 @@ namespace WebApplication1.Pages.Reviews
             {
                 return RedirectToPage("/Movies/Index");
             }
-            //add UserCanAccess
             else if (!accessControl.UserCanAccess(Review))
             {
                 return Forbid();

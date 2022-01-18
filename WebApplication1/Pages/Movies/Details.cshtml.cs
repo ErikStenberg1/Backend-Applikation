@@ -18,7 +18,6 @@ namespace WebApplication1.Pages.Movies
         {
             this.database = database;
         }
-        public Actor Actor { get; set; }
         public Movie Movie { get; set; }
         public List<Actor> Actors { get; set; }
         public List<Review> Reviews { get; set; }

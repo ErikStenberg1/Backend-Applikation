@@ -5,13 +5,14 @@
 @{
     ViewData["Title"] = "Create Review";
 }
-
+<div class="review">
 <h1>@ViewData["Title"]</h1>
 
 <form method="post">
     <partial name="_EditForm" for="Review"/>
-    <button type="submit">Create Contact</button>
+    <button type="submit">Create Review</button>
 </form>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

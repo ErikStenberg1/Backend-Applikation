@@ -11,7 +11,8 @@ namespace WebApplication.Models
     {
         public int ID { get; set; }
         public string Text { get; set; }
-        public int? Score { get; set; }
+        [Range(1, 5, ErrorMessage = "Please enter a number between 1 and 5")]
+        public int Score { get; set; }
         [Required]
         public string UserID { get; set; }
         public IdentityUser User { get; set; }

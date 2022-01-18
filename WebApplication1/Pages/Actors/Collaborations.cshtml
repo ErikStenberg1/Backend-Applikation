@@ -2,27 +2,41 @@
 @model WebApplication1.Pages.Actors.CollaborationsModel
 @{
 }
-<form method="post">
-    <table>
+<form method="get">
+    <table class="col-table">
         <thead>
             <tr>
-                <th>Show collaborations between:</th>
+                <th><h1>Show collaborations between:</h1></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="col-table">
             <tr>
                 <td>
-                    <select asp-for="FirstActorID" asp-items="Model.FirstActorList">
+                    <select asp-for="FirstActorID" asp-items="Model.ActorList">
                     </select>
                 </td>
             <tr>
                 <td>
-                    <select asp-for="SecondActorID" asp-items="Model.SecondActorList">
+                    <select asp-for="SecondActorID" asp-items="Model.ActorList">
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <td><button type="submit" class="btn">Search</button></td>
             </tr>
         </tbody>
     </table>
-    <button type="submit">Search</button>
 </form>
+
+<table class="left-table">
+    @foreach (var movie in Model.Movies)
+    {
+        <tbody class="tbody">
+            <tr class="flex">
+                <td><img class="img" src="~/Posters/@movie.PosterPath" /></td>
+                <td><a asp-page="/Movies/Details" asp-route-id="@movie.ID">@movie.Title</a></td>
+            </tr>
+        </tbody>
+    }
+</table>
 

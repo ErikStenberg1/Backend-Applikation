@@ -19,16 +19,16 @@
 </form>
 
 <table class="table">
-    @foreach (Movie movies in Model.Movies)
+    @foreach (Movie movie in Model.Movies)
     {
-        <tbody>
+        <tbody class="tbody">
             <tr>
-                <td><img class="img" src="~/Posters/@movies.PosterPath" /></td>
-                <td>@movies.AvgScore &#9734 </td>
-                <td><a asp-page="./Details" asp-route-id="@movies.ID">@movies.Title</a></td>
+                <td><img class="img" src="~/Posters/@movie.PosterPath" /></td>
+                <td>@movie.AvgScore/5 &#9734 </td>
+                <td><a asp-page="./Details" asp-route-id="@movie.ID">@movie.Title</a></td>
             </tr>
             <tr>
-                <td><a asp-page="/Reviews/Index" asp-route-id="@movies.ID">Write, delete or edit a review</a></td>
+                <td><a asp-page="/Reviews/Index" asp-route-id="@movie.ID">Create, delete or edit a review</a></td>
             </tr>
         </tbody>
     }

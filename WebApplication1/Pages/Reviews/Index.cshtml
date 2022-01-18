@@ -3,23 +3,32 @@
 @{
 }
 @{
-    ViewData["Title"] = "Create Review";
+    ViewData["Title"] = "Create, delete or edit a review";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<th><a asp-page="./Create" asp-route-id="@Model.MovieID">Create a review</a></th>
-<th><a asp-page="./Edit" asp-route-id="@Model.ReviewID">Edit your review</a></th>
-<th><a asp-page="./Delete" asp-route-id="@Model.ReviewID">Delete your review</a></th>
-
-<table>
-    <tbody>
+<table class="table">
+    <tbody class="tbody">
+        <tr>
+            <th>
+                <h1 class="center">@ViewData["Title"]</h1>
+            </th>
+        </tr>
+        <tr>
+            <td class="td-spacing"><a asp-page="./Create" asp-route-id="@Model.MovieID">Create a review</a></td>
+            <td class="td-spacing"><a asp-page="./Edit" asp-route-id="@Model.ReviewID">Edit your review</a></td>
+            <td class="td-spacing"><a asp-page="./Delete" asp-route-id="@Model.ReviewID">Delete your review</a></td>
+        </tr>
+    </tbody>
+</table>
+<table class="table">
+    <tbody class="tbody">
         @foreach (var review in Model.Reviews)
         {
             <tr>
-                <td>@review.User.UserName</td>
-                <td>@review.Text</td>
-                <td>@review.Score</td>
+                <td id="reviewText"><span class="bold">Review: </span> @review.Text</td>
+            </tr>
+            <tr>
+                <td id="score"><span class="bold">Rating:</span> @review.Score</td>
             </tr>
         }
     </tbody>

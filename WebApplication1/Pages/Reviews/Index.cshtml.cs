@@ -22,8 +22,6 @@ namespace WebApplication1.Pages.Reviews
         }
 
         public List<Review> Reviews{ get; set; }
-        public Review Review { get; set; }
-        public Movie Movie { get; set; }
         public int MovieID { get; set; }
         public int ReviewID { get; set; }
         public async Task OnGetAsync(int id)
@@ -42,7 +40,5 @@ namespace WebApplication1.Pages.Reviews
                 .Select(m => m.ID)
                 .SingleOrDefaultAsync();
         }
-
-        
     }
 }

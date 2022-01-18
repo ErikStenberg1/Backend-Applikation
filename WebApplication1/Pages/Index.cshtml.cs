@@ -30,7 +30,7 @@ namespace WebApplication1.Pages
                 var morgan = new Actor() { FirstName = "Morgan", LastName = "Freeman", Age = 70, PosterPath = "morgan.png"};
                 var tom = new Actor() { FirstName = "Tom", LastName = "Hanks", Age = 60, PosterPath = "tom.png"};
                 var will = new Actor() { FirstName = "Will", LastName = "Smith", Age = 53, PosterPath = "will.png" };
-                var christian = new Actor() { FirstName = "Chrisitan", LastName = "Bale", Age = 47, PosterPath = "christian.png"};
+                var christian = new Actor() { FirstName = "Christian", LastName = "Bale", Age = 47, PosterPath = "christian.png"};
                 var avengers = new Movie() { Title = "Avengers", PosterPath = "avenger.jpg", Category = "Action", ReleaseYear = 2020, Actors = new() { brad, harrison, morgan, christian } };
                 var valentine = new Movie() { Title = "Valentine's Day", PosterPath = "valentine.jpg", Category = "Comedy", ReleaseYear = 2019, Actors = new() { morgan, tom, brad } };
                 var waiting = new Movie() { Title = "Waiting For Forever", PosterPath = "waiting.jpg", Category = "Romance", ReleaseYear = 2011, Actors = new() { tom, harrison, christian } };

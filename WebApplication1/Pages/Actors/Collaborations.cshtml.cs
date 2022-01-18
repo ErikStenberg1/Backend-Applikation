@@ -15,25 +15,25 @@ namespace WebApplication1.Pages.Actors
     public class CollaborationsModel : PageModel
     {
         private readonly ApplicationDbContext database;
+        private readonly AccessControl accessControl;
 
         public CollaborationsModel(ApplicationDbContext database, AccessControl accessControl)
         {
             this.database = database;
+            this.accessControl = accessControl;
         }
-        public Actor Actor { get; set; }
         public List<Movie> Movies { get; set; }
-        public string SortColumn { get; set; }
-        public int SortColumn2 { get; set; }
-        public List<SelectListItem> FirstActorList { get; set; }
-        public List<SelectListItem> SecondActorList { get; set; }
+        public List<SelectListItem> ActorList { get; set; }
+        [FromQuery]
         public int FirstActorID { get; set; }
+        [FromQuery]
         public int SecondActorID { get; set; }
 
 
 
         private async Task Setup()
         {
-            FirstActorList = await database.Actor.AsNoTracking()
+            ActorList = await database.Actor.AsNoTracking()
                 .OrderBy(a => a.FirstName)
                 .ThenBy(a => a.LastName)
                 .Select(a => new SelectListItem
@@ -42,30 +42,17 @@ namespace WebApplication1.Pages.Actors
                     Text = a.fullname
                 })
                 .ToListAsync();
-            SecondActorList = await database.Actor.AsNoTracking()
-                .OrderBy(a => a.FirstName)
-                .ThenBy(a => a.LastName)
-                .Select(a => new SelectListItem
-                {
-                    Value = a.ID.ToString(),
-                    Text = a.fullname
-                })
-                .ToListAsync();
-
         }
         public async Task OnGetAsync()
         {
             await Setup();
-        }
-        public async Task OnPostAsync(Actor actor, Actor actor1)
-        {
-            await Setup();
-            actor = await database.Actor.FindAsync(actor.ID);
-            actor1 = await database.Actor.FindAsync(actor1.ID);
+            var firstActor = await database.Actor.FindAsync(FirstActorID);
+            var secondActor = await database.Actor.FindAsync(SecondActorID);
 
-            var movies = await database.Movie
-                .Where(m => m.Actors.Contains(actor))
+            Movies = await database.Movie
+                .Where(m => m.Actors.Contains(firstActor) && m.Actors.Contains(secondActor))
                 .ToListAsync();
+
         }
     }
 }

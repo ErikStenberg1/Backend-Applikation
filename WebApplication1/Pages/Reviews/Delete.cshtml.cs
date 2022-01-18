@@ -20,8 +20,6 @@ namespace WebApplication1.Pages.Reviews
             this.database = database;
             this.accessControl = accessControl;
         }
-        public Movie Movie { get; set; }
-        public int MovieID { get; set; }
         public Review Review { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)

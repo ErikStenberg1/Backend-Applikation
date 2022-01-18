@@ -23,7 +23,6 @@ namespace WebApplication1.Pages.Reviews
         public Movie Movie { get; set; }
         public List<Review> Reviews { get; set; }
         public int ReviewID { get; set; }
-        public int MovieID { get; set; }
         private void CreateEmptyReview()
         {
             Review = new Review
@@ -38,13 +37,13 @@ namespace WebApplication1.Pages.Reviews
             Movie = database.Movie.FirstOrDefault(m => m.ID == id);
 
             CreateEmptyReview();
+
         }
         public async Task<IActionResult> OnPostAsync(Review review, int id)
         {
             Reviews = await database.Review.Where(r => r.MovieID == id && r.UserID == accessControl.LoggedInUserID).ToListAsync();
             if (!ModelState.IsValid)
             {
-                //var errors = modelstate.values.selectmany(v => v.errors);
                 return Page();
             }
             else if (Reviews.Any())
