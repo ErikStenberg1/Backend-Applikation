@@ -1,0 +1,28 @@
+﻿@model WebApplication.Models.Movie;
+
+<div asp-validation-summary="ModelOnly"></div>
+<input type="hidden" asp-for="ID">
+<table>
+    <tbody>
+        <tr>
+            <th><label asp-for="Title">@Html.DisplayNameFor(m => m.Title)</label></th>
+            <td><input asp-for="Title"/></td>
+            <td><span asp-validation-for="Title"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="Category">@Html.DisplayNameFor(m => m.Category)</label></th>
+            <td><input asp-for="Category"></td>
+            <td><span asp-validation-for="Category"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="ReleaseYear">@Html.DisplayNameFor(m => m.ReleaseYear)</label></th>
+            <td><input asp-for="ReleaseYear"></td>
+            <td><span asp-validation-for="ReleaseYear"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="PosterPath">@Html.DisplayNameFor(m => m.PosterPath)</label></th>
+            <td><input asp-for="PosterPath"></td>
+            <td><span asp-validation-for="PosterPath"></span></td>
+        </tr>
+    </tbody>
+</table>

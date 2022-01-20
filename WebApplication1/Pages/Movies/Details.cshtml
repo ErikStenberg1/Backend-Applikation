@@ -10,6 +10,12 @@
             <tr>
                 <td><img class="movie-img" src="~/Posters/@Model.Movie.PosterPath" /></td>
             </tr>
+            <tr>
+                <td><a asp-page="/Movies/Delete" asp-route-id="@Model.Movie.ID">Delete this movie</a></td>
+            </tr>
+            <tr>
+                <td><a asp-page="/Movies/Edit" asp-route-id="@Model.Movie.ID">Edit this movie</a></td>
+            </tr>
         </tbody>
     </table>
     <table class="table">

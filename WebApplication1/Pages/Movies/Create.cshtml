@@ -1,0 +1,18 @@
+﻿@page
+@model WebApplication1.Pages.Movies.CreateModel
+@{
+}
+@{
+    ViewData["Title"] = "Create Movie";
+}
+<div class="review">
+    <h1>@ViewData["Title"]</h1>
+
+    <form method="post">
+        <partial name="_EditForm" for="Movie" />
+        <button type="submit">Create Movie</button>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
