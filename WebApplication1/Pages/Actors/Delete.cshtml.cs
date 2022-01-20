@@ -23,7 +23,7 @@ namespace WebApplication1.Pages.Actors
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Actor = await database.Actor
-                .Where(m => m.ID == id)
+                .Where(a => a.ID == id)
                 .SingleOrDefaultAsync();
 
             return Page();
@@ -31,7 +31,7 @@ namespace WebApplication1.Pages.Actors
         public async Task<IActionResult> OnPostAsync(int id)
         {
             Actor = await database.Actor
-                .Where(m => m.ID == id)
+                .Where(a => a.ID == id)
                 .SingleOrDefaultAsync();
 
             var actor = await database.Actor.FindAsync(id);

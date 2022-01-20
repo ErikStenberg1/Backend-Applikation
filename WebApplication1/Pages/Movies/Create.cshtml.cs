@@ -12,12 +12,10 @@ namespace WebApplication1.Pages.Movies
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext database;
-        private readonly AccessControl accessControl;
 
-        public CreateModel(ApplicationDbContext database, AccessControl accessControl)
+        public CreateModel(ApplicationDbContext database)
         {
             this.database = database;
-            this.accessControl = accessControl;
         }
         public Movie Movie { get; set; }
         private void CreateEmptyMovie()
@@ -26,10 +24,6 @@ namespace WebApplication1.Pages.Movies
             {
                 
             };
-        }
-        public async Task OnGetAsync()
-        {
-            CreateEmptyMovie();
         }
         public async Task<IActionResult> OnPostAsync(Movie movie)
         {

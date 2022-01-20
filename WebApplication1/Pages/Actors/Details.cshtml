@@ -15,6 +15,12 @@
             <tr>
                 <td>Age: @Model.Actor.Age</td>
             </tr>
+            <tr>
+                <td><a asp-page="/Actors/Edit" asp-route-id="@Model.Actor.ID">Edit this actor</a></td>
+            </tr>
+            <tr>
+                <td><a asp-page="/Actors/Delete" asp-route-id="@Model.Actor.ID">Delete this actor</a></td>
+            </tr>
         </tbody>
     </table>
 

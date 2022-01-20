@@ -13,12 +13,10 @@ namespace WebApplication1.Pages.Movies
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext database;
-        private readonly AccessControl accessControl;
 
-        public EditModel(ApplicationDbContext database, AccessControl accessControl)
+        public EditModel(ApplicationDbContext database)
         {
             this.database = database;
-            this.accessControl = accessControl;
         }
         public Movie Movie { get; set; }
         public async Task LoadMovie(int id)

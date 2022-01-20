@@ -1,4 +1,27 @@
-﻿@page
-@model WebApplication1.Pages.Actors._EditFormModel
-@{
-}
+﻿@model WebApplication.Models.Actor;
+
+<div asp-validation-summary="ModelOnly"></div>
+<table>
+    <tbody>
+        <tr>
+            <th><label asp-for="FirstName">@Html.DisplayNameFor(m => m.FirstName)</label></th>
+            <td><input asp-for="FirstName"></td>
+            <td><span asp-validation-for="FirstName"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="LastName">@Html.DisplayNameFor(m => m.LastName)</label></th>
+            <td><input asp-for="LastName"></td>
+            <td><span asp-validation-for="LastName"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="Age">@Html.DisplayNameFor(m => m.Age)</label></th>
+            <td><input asp-for="Age"></td>
+            <td><span asp-validation-for="Age"></span></td>
+        </tr>
+        <tr>
+            <th><label asp-for="PosterPath">@Html.DisplayNameFor(m => m.PosterPath)</label></th>
+            <td><input asp-for="PosterPath"></td>
+            <td><span asp-validation-for="PosterPath"></span></td>
+        </tr>
+    </tbody>
+</table>

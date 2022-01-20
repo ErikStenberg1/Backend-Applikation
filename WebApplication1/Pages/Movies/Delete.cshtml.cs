@@ -13,12 +13,10 @@ namespace WebApplication1.Pages.Movies
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext database;
-        private readonly AccessControl accessControl;
 
-        public DeleteModel(ApplicationDbContext database, AccessControl accessControl)
+        public DeleteModel(ApplicationDbContext database)
         {
             this.database = database;
-            this.accessControl = accessControl;
         }
         public Movie Movie { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)

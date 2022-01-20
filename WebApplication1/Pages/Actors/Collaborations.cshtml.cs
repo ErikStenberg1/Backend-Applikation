@@ -39,7 +39,7 @@ namespace WebApplication1.Pages.Actors
                 .Select(a => new SelectListItem
                 {
                     Value = a.ID.ToString(),
-                    Text = a.fullname
+                    Text = a.FullName
                 })
                 .ToListAsync();
         }
