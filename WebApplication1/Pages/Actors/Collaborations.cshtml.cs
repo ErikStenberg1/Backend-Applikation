@@ -15,12 +15,10 @@ namespace WebApplication1.Pages.Actors
     public class CollaborationsModel : PageModel
     {
         private readonly ApplicationDbContext database;
-        private readonly AccessControl accessControl;
 
-        public CollaborationsModel(ApplicationDbContext database, AccessControl accessControl)
+        public CollaborationsModel(ApplicationDbContext database)
         {
             this.database = database;
-            this.accessControl = accessControl;
         }
         public List<Movie> Movies { get; set; }
         public List<SelectListItem> ActorList { get; set; }
