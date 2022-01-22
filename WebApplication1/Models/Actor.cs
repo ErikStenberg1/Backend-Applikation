@@ -18,6 +18,6 @@ namespace WebApplication.Models
         public string PosterPath { get; set; }
         public List<Movie> Movies { get; set; }
         [NotMapped]
-        public string fullname { get { return this.FirstName + " " + this.LastName; } }
+        public string FullName { get { return this.FirstName + " " + this.LastName; } }
     }
 }

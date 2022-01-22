@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace WebApplication.Models
         [Required]
         public string PosterPath { get; set; }
         public List<Actor> Actors { get; set; }
+        [NotMapped]
         public double AvgScore { get; set; }
     }
 }
