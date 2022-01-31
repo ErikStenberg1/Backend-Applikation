@@ -24,29 +24,51 @@ namespace WebApplication1.Pages.Actors
         public string SearchTerm { get; set; }
         public const string actor = "Actor";
         public const string movie = "Movie";
-        private string[] sortColumns = { actor, movie };
+        public const string title = "Title";
+        public const string release = "Age";
+        private string[] searchColumns = { actor, movie };
+        [FromQuery]
+        public string SearchColumn { get; set; }
+        public SelectList SearchColumnList { get; set; }
+        private string[] sortColums = { title, release};
         [FromQuery]
         public string SortColumn { get; set; }
         public SelectList SortColumnList { get; set; }
-         
+
+
         public async Task OnGetAsync()
         {
-            SortColumnList = new SelectList(sortColumns, actor);
+            SearchColumnList = new SelectList(searchColumns, actor);
+            SortColumnList = new SelectList(sortColums, release);
 
             var query = database.Actor.AsNoTracking();
             if (SearchTerm != null)
             {
                 query = query.Where(a =>
                 a.FirstName.ToLower().Contains(SearchTerm.ToLower()) ||
-                a.LastName.ToLower().Contains(SearchTerm.ToLower())).OrderBy(c => c.FirstName);
+                a.LastName.ToLower().Contains(SearchTerm.ToLower()));
             }
-            if (SortColumn != null)
+            if (SearchColumn != null)
             {    
-                if (SortColumn == movie)
+                if (SearchColumn == movie)
                 {
-                    query = database.Actor.AsNoTracking()
+                    query = query
                     .Include(actor => actor.Movies)
                     .Where(actor => actor.Movies.Any(movie => movie.Title.ToLower().Contains(SearchTerm.ToLower())));
+                }
+            }
+            if (SortColumn != null)
+            {
+                if (SortColumn == title)
+                {
+                    query = query
+                        .OrderBy(a => a.FirstName)
+                        .ThenBy(a => a.LastName);
+                }
+                else if (SortColumn == release)
+                {
+                    query = query
+                        .OrderBy(a => a.Age);
                 }
             }
             Actors = await query.ToListAsync();
