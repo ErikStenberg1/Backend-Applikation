@@ -1,0 +1,23 @@
+﻿@page
+@model WebApplication1.Pages.Movies.AddActorModel
+@{
+}
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th><h1>Add actor:</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select asp-for="Actor.ID" asp-items="Model.ActorList">
+                    </select>
+                </td>
+            <tr>
+                <td><button type="submit" class="btn">Search</button></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

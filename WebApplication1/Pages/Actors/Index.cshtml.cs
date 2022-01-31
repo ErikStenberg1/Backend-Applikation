@@ -24,13 +24,13 @@ namespace WebApplication1.Pages.Actors
         public string SearchTerm { get; set; }
         public const string actor = "Actor";
         public const string movie = "Movie";
-        public const string title = "Title";
+        public const string name = "Name";
         public const string release = "Age";
         private string[] searchColumns = { actor, movie };
         [FromQuery]
         public string SearchColumn { get; set; }
         public SelectList SearchColumnList { get; set; }
-        private string[] sortColums = { title, release};
+        private string[] sortColums = { name, release};
         [FromQuery]
         public string SortColumn { get; set; }
         public SelectList SortColumnList { get; set; }
@@ -59,7 +59,7 @@ namespace WebApplication1.Pages.Actors
             }
             if (SortColumn != null)
             {
-                if (SortColumn == title)
+                if (SortColumn == name)
                 {
                     query = query
                         .OrderBy(a => a.FirstName)
