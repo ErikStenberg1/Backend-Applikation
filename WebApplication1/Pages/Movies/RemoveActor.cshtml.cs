@@ -11,11 +11,11 @@ using WebApplication1.Data;
 
 namespace WebApplication1.Pages.Movies
 {
-    public class AddActorModel : PageModel
+    public class RemoveActorModel : PageModel
     {
         private readonly ApplicationDbContext database;
 
-        public AddActorModel(ApplicationDbContext database)
+        public RemoveActorModel(ApplicationDbContext database)
         {
             this.database = database;
         }
@@ -23,6 +23,8 @@ namespace WebApplication1.Pages.Movies
         public List<SelectListItem> ActorList { get; set; }
         [FromQuery]
         public Actor Actor { get; set; }
+        public List<Actor> Actors { get; set; }
+
         public async Task LoadMovie(int id)
         {
             Movie = await database.Movie
@@ -33,7 +35,7 @@ namespace WebApplication1.Pages.Movies
         public async Task OnGetAsync(int id)
         {
             ActorList = await database.Actor.AsNoTracking()
-            .Where(a => a.Movies.All(m => m.ID != id))
+            .Where(a => a.Movies.Any(m => m.ID == id))
             .OrderBy(a => a.FirstName)
             .ThenBy(a => a.LastName)
             .Select(a => new SelectListItem
@@ -47,7 +49,8 @@ namespace WebApplication1.Pages.Movies
         {
             await LoadMovie(id);
             var selectedActor = await database.Actor.FindAsync(actor.ID);
-            Movie.Actors.Add(selectedActor);
+            
+            Movie.Actors.Remove(selectedActor);
 
             await database.SaveChangesAsync();
             return RedirectToPage("./Index");
