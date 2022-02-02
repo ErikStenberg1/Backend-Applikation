@@ -35,8 +35,7 @@ namespace WebApplication1.Pages.Movies
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                //return Page();
+                return Page();
             }
             CreateEmptyMovie();
             Movie.Title = movie.Title;

@@ -19,7 +19,7 @@ namespace WebApplication1.Pages.Actors
             this.database = database;
         }
 
-        public IList<Actor> Actors { get; set; }
+        public List<Actor> Actors { get; set; }
         [FromQuery]
         public string SearchTerm { get; set; }
         public const string actor = "Actor";
@@ -44,19 +44,26 @@ namespace WebApplication1.Pages.Actors
             var query = database.Actor.AsNoTracking();
             if (SearchTerm != null)
             {
-                query = query.Where(a =>
-                a.FirstName.ToLower().Contains(SearchTerm.ToLower()) ||
-                a.LastName.ToLower().Contains(SearchTerm.ToLower()));
-            }
-            if (SearchColumn != null)
-            {    
-                if (SearchColumn == movie)
+                if (SearchColumn != null)
                 {
-                    query = query
-                    .Include(actor => actor.Movies)
-                    .Where(actor => actor.Movies.Any(movie => movie.Title.ToLower().Contains(SearchTerm.ToLower())));
+                    if (SearchColumn == movie)
+                    {
+                        query = query
+                            .Include(actor => actor.Movies)
+                            .Where(actor => actor.Movies
+                            .Any(movie => movie.Title
+                            .ToLower()
+                            .Contains(SearchTerm.ToLower())));
+                    }
+                    else if (SearchColumn == actor)
+                    {
+                        query = query.Where(a =>
+                            a.FirstName.ToLower().Contains(SearchTerm.ToLower()) ||
+                            a.LastName.ToLower().Contains(SearchTerm.ToLower()));
+                    }
                 }
             }
+
             if (SortColumn != null)
             {
                 if (SortColumn == name)
